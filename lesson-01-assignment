@@ -1,0 +1,31 @@
+# Question 1 - id and email of 2 students enrolled in intro spring 25
+
+# 1 find course id 
+# 2 plucks the student_id where course id is spring_intro_id (5) and saves them to student_ids hash
+# 3 of those students we sample 2 of them and assign to two_emails ( note skip this step to get all student emails)
+# 4 plucks id and email column of the 2 student ids sampled above from the Student tab.
+# 5 id and email for all students
+
+spring_intro_id = Course.find_by(coding_class_id: 1, trimester_id: 5).id 
+student_ids = Enrollment.where(course_id: spring_intro_id).pluck(:student_id)
+two_emails = student_ids.sample(2)
+ answer = Student.where(id: two_emails).pluck(:id, :email)
+# answer = Student.where(id: student_ids).pluck(:id, :email)
+puts answer
+
+# Question 2 - Email all mentors who have not assigned a final Grade.
+
+# 1 find course id 
+# 2 Get the unique enrollment ids where the grade is nil and the course is 5 or spring intro 
+# 3 Our mentor ids are Mentor Enrollment Assignment where enrollment id matches our enrollment ids above.
+# 4 of the 3 mentors who match the 3 with final grade nil and course id 5 sample 2
+# 5 finally we pluck the id and email columns from our 2 remaining mentors.
+# 6 id and email for all mentors
+
+spring_intro_id = Course.find_by(coding_class_id: 1, trimester_id: 5).id 
+enrollment_ids = Enrollment.where(final_grade: nil, course_id: spring_intro_id).pluck(:id)
+mentor_ids = MentorEnrollmentAssignment.where(enrollment_id: enrollment_ids).pluck(:mentor_id)
+two_mentors = mentor_ids.sample(2)
+ answer = Mentor.where(id: two_mentors).pluck(:id, :email)
+# answer =Mentor.where(id: mentor_ids).pluck(:id, :email)
+puts answer
