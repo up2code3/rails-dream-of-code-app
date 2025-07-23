@@ -1,0 +1,93 @@
+#Question 1
+    #create courses 1
+    new_course = CodingClass.all
+    new_course.each do |x|
+    Course.create(coding_class_id:x.id, trimester_id:8, max_enrollment:25)
+    end
+
+    #create courses 2
+    CodingClass.all.each do |x|
+    Course.create(coding_class_id: x.id, trimester_id: 8, max_enrollment: 25)
+    End
+
+#Question 2
+    #create student
+    Student.create(first_name:"Tristan", last_name:"White", email: "Twhite@Gmail.com")
+
+    #create enrollment 
+    Enrollment.create(course_id:44,student_id:51)
+
+    # assign to mentor with less that 2 students
+    # create avaliable mentors
+    available_mentors = []
+    Mentor.all.each  do |x|
+    count =  MentorEnrollmentAssignment.where(mentor_id:x.id).count
+    if count <= 2 
+        available_mentors << x 
+        puts "id##{x.id} #{x.first_name} only has #{count} students"
+    else
+        puts "this mentor has too many students"
+    end
+    end
+    puts available_mentors.pluck(:id,:first_name)
+
+    #Create new MentorEnrollmentAssignment 
+    MentorEnrollmentAssignment.create(mentor_id:available_mentors.last.id,enrollment_id: Enrollment.last.id)
+
+#Question 3
+    I would like to create a record collection database. All users will have roughly the same roles and access.
+    
+    A user can register / log in.
+    A user can CRUD Records (music album) to their collection 
+        A user can add album Art 
+        A user can add rating
+        A user can grade codintion
+        A user can not if it was a digital release only (meaning grade is N/A)
+    A user can see other peoples collecitons
+    A youtube widget that suggest videos based on the Artist name and album title
+    A user can Grade of Record enum: poor, good, very good, mint.
+
+#Question 4
+    1 user, album , grade, album art image, Album title, type: digital/vinyl, description, condition.
+    2 
+        user --> id: interger , name: string , email: string
+        Album --> id: interger , title: string, artist: string
+        Collection --> the relation of user has_many records
+        
+        Class User
+        has_many collecitons
+        has_many albums through collecitons
+
+        Class Album
+        has_many collections
+        has_many users through collections 
+
+        Class Collection
+        belongs_to user
+        belongs_to collection
+
+        Tables and columns --> ERD.. I think...
+        users
+            id: interger
+            name: string
+            email:string
+            password:string
+        
+        albums
+            id: interger
+            title: string
+            artist: string
+            description: text
+
+        collections
+            id: interger
+            user_id: interger 
+            album_id: interger
+            condition: enum: poor, good, verygood, mint
+            rating: interger 1 - 5 stars? 
+            album_art_url: string? 
+            format: enum: digital only / vinyl
+
+        conditon is specifc to collecitons becasue it is the conditon of the specific copy the user has.
+        for the image , what if I want to upload locally ?
+        i know the youtube player is not database related... but... it sounds cool...
