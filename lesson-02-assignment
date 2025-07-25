@@ -1,38 +1,41 @@
 #Question 1
     #create courses 1
-    new_course = CodingClass.all
-    new_course.each do |x|
-    Course.create(coding_class_id:x.id, trimester_id:8, max_enrollment:25)
+    all_coding_classes = CodingClass.all
+
+    all_coding_classes.each do |coding_class|
+    Course.create(coding_class_id:coding_class.id, trimester_id:8, max_enrollment:25)
     end
 
     #create courses 2
-    CodingClass.all.each do |x|
-    Course.create(coding_class_id: x.id, trimester_id: 8, max_enrollment: 25)
-    End
+    CodingClass.all.each do |coding_class|
+    Course.create(coding_class_id: coding_class.id, trimester_id: 8, max_enrollment: 25)
+    end
 
 #Question 2
     #create student
-    Student.create(first_name:"Tristan", last_name:"White", email: "Twhite@Gmail.com")
+    target_student = Student.create(first_name:"Tristan", last_name:"White", email: "Twhite@Gmail.com")
 
     #create enrollment 
-    Enrollment.create(course_id:44,student_id:51)
+    target_enrollment = Enrollment.create(course_id:44,student_id:target_student.id)
 
     # assign to mentor with less that 2 students
     # create avaliable mentors
     available_mentors = []
-    Mentor.all.each  do |x|
-    count =  MentorEnrollmentAssignment.where(mentor_id:x.id).count
+    Mentor.all.each  do |mentor|
+    count =  MentorEnrollmentAssignment.where(mentor_id:mentor.id).count
     if count <= 2 
-        available_mentors << x 
-        puts "id##{x.id} #{x.first_name} only has #{count} students"
+        available_mentors << mentor 
+        puts "id##{mentor.id} #{mentor.first_name} only has #{count} students"
     else
         puts "this mentor has too many students"
     end
     end
     puts available_mentors.pluck(:id,:first_name)
 
+    target_mentor = available_mentors.sample
+    
     #Create new MentorEnrollmentAssignment 
-    MentorEnrollmentAssignment.create(mentor_id:available_mentors.last.id,enrollment_id: Enrollment.last.id)
+    MentorEnrollmentAssignment.create(mentor_id:target_mentor.id,enrollment_id: target_enrollment.id)
 
 #Question 3
     I would like to create a record collection database. All users will have roughly the same roles and access.
