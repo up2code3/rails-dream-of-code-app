@@ -1,0 +1,32 @@
+Q1
+topics table (Model association table)
+lesson_topics table (Join table)
+
+Q2
+Topics table
+	id (auto generated primary key)
+	title (the ask for tags) = string → example (“CSS” or “SQL”)
+LessonTopics table
+	lesson_id (foreign key)
+	topic_id (foregin key)
+
+Q3
+I think thats it, maybe description? 
+
+Q4
+topics
+	id (auto generated primary key)
+	title (string)
+topics_lessons
+	id (not required??? but more work not to....)  
+	lesson_id (foreign key)
+	topic_id (foreign key)
+
+Q5
+bin/rails generate migration create_topics
+>>>edit table in migration file
+bin/rails db:migrate
+
+bin/rails generate migration create_lesson_topics
+>>>edit table in migration file
+bin/rails db:migrate
