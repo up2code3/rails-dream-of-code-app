@@ -1,4 +1,4 @@
-
+erDiagram
   USERS ||--o{ ENTRIES : "has many"
   USERS ||--o{ COMMENTS : "has many"
 
