@@ -36,7 +36,7 @@ erDiagram
     string title
     integer bpm
     string key
-    integer year NOT NULL
+    integer year
     text notes
     string video_url
     datetime created_at
