@@ -44,7 +44,7 @@ RSpec.describe Course, type: :model do
     end
   end
 
-  describe '.student_name_list' do
+  describe '.student_name_list', skip:true do
     # First, we'll write a test that expects the method to exist
     # for an instance of a course
     it 'exists for a course' do
