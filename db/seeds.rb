@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'faker'
 # This file should ensure the existence of records required to run the application in every environment (production,
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
@@ -9,13 +11,16 @@ require 'faker'
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 #
-puts "Seeding data..."
+puts 'Seeding data...'
 
 # Create coding classes
-CodingClass.find_or_create_by!(title: 'Intro to Programming', description: 'Learn the basics of web development, including HTML, CSS and Javascript.')
+CodingClass.find_or_create_by!(title: 'Intro to Programming',
+                               description: 'Learn the basics of web development, including HTML, CSS and Javascript.')
 CodingClass.find_or_create_by!(title: 'React', description: 'Learn frontend web development with the React framework.')
-CodingClass.find_or_create_by!(title: 'NodeJS', description: 'Learn the basics of backend web development using NodeJS.')
-CodingClass.find_or_create_by!(title: 'Ruby on Rails', description: 'Learn the basics of Ruby and the Ruby on Rails framework.')
+CodingClass.find_or_create_by!(title: 'NodeJS',
+                               description: 'Learn the basics of backend web development using NodeJS.')
+CodingClass.find_or_create_by!(title: 'Ruby on Rails',
+                               description: 'Learn the basics of Ruby and the Ruby on Rails framework.')
 CodingClass.find_or_create_by!(title: 'Python', description: 'Learn the basics of Python.')
 
 # Create trimester records for 2023, 2024, 2025
@@ -24,43 +29,50 @@ Trimester.find_or_create_by!(
   term: 'Fall',
   application_deadline: '2023-08-15',
   start_date: '2023-09-01',
-  end_date: '2023-11-30')
+  end_date: '2023-11-30'
+)
 Trimester.find_or_create_by!(
   year: '2024',
   term: 'Spring',
   application_deadline: '2024-02-15',
   start_date: '2024-03-01',
-  end_date: '2024-05-31')
+  end_date: '2024-05-31'
+)
 Trimester.find_or_create_by!(
   year: '2024',
   term: 'Summer',
   application_deadline: '2024-05-15',
   start_date: '2024-06-01',
-  end_date: '2024-08-31')
+  end_date: '2024-08-31'
+)
 Trimester.find_or_create_by!(
   year: '2024',
   term: 'Fall',
   application_deadline: '2024-08-15',
   start_date: '2024-09-01',
-  end_date: '2024-11-30')
+  end_date: '2024-11-30'
+)
 Trimester.find_or_create_by!(
   year: '2025',
   term: 'Spring',
   application_deadline: '2025-02-15',
   start_date: '2025-03-01',
-  end_date: '2025-05-31')
+  end_date: '2025-05-31'
+)
 Trimester.find_or_create_by!(
   year: '2025',
   term: 'Summer',
   application_deadline: '2025-05-15',
   start_date: '2025-06-01',
-  end_date: '2025-08-31')
+  end_date: '2025-08-31'
+)
 Trimester.find_or_create_by!(
   year: '2025',
   term: 'Fall',
   application_deadline: '2025-08-15',
   start_date: '2025-09-01',
-  end_date: '2025-11-30')
+  end_date: '2025-11-30'
+)
 
 # Create course records for each coding class and trimester
 # A course is a specific instance of a coding class in a trimester. (Intro to Programming - Spring 2024, for example)
@@ -81,21 +93,21 @@ Course.all.each do |course|
       course_id: course.id,
       title: "#{course.coding_class.title} - Week #{lesson_number}",
       lesson_number: lesson_number,
-      assignment_due_date: course.trimester.start_date + (lesson_number*9).days
+      assignment_due_date: course.trimester.start_date + (lesson_number * 9).days
     )
   end
 end
 
 # Create enrollments for past and current trimesters
 Trimester.where("start_date < '2025-05-01'").each do |trimester|
-
   # Create 10 enrollments for each of the intro courses
-  intro_course = Course.find_by(trimester_id: trimester.id, coding_class_id: CodingClass.find_by(title: 'Intro to Programming'))
+  intro_course = Course.find_by(trimester_id: trimester.id,
+                                coding_class_id: CodingClass.find_by(title: 'Intro to Programming'))
 
   (1..10).each do |i|
     student = Student.find_or_create_by!(
-      first_name: Faker::Name.first_name, 
-      last_name: Faker::Name.last_name, 
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
       email: Faker::Internet.email
     )
 
@@ -112,7 +124,8 @@ Trimester.where("start_date < '2025-05-01'").each do |trimester|
   previous_trimester = Trimester.find_by(id: trimester.id - 1)
   next unless previous_trimester
 
-  previous_intro_course = Course.find_by(trimester_id: previous_trimester.id, coding_class_id: CodingClass.find_by(title: 'Intro to Programming'))
+  previous_intro_course = Course.find_by(trimester_id: previous_trimester.id,
+                                         coding_class_id: CodingClass.find_by(title: 'Intro to Programming'))
   previous_intro_enrollments = Enrollment.where(course_id: previous_intro_course.id)
 
   previous_intro_enrollments.each_with_index do |enrollment, index|
@@ -129,12 +142,12 @@ end
 
 # Create mentors
 enrollment_count = Enrollment.count
-mentor_count = (enrollment_count.to_f/3.0).ceil
+mentor_count = (enrollment_count.to_f / 3.0).ceil
 
-(1..mentor_count).each do |i|
+(1..mentor_count).each do |_i|
   mentor = Mentor.find_or_create_by!(
-    first_name: Faker::Name.first_name, 
-    last_name: Faker::Name.last_name, 
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
     email: Faker::Internet.email
   )
 
@@ -144,9 +157,7 @@ mentor_count = (enrollment_count.to_f/3.0).ceil
       mentor_id: mentor.id,
       enrollment_id: enrollment.id
     )
-
   end
 end
 
-puts "End data seeding"
-
+puts 'End data seeding'
