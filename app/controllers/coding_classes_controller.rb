@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class CodingClassesController < ApplicationController
-  before_action :set_coding_class, only: %i[ show edit update destroy ]
+  before_action :set_coding_class, only: %i[show edit update destroy]
 
   # GET /coding_classes or /coding_classes.json
   def index
@@ -7,8 +9,7 @@ class CodingClassesController < ApplicationController
   end
 
   # GET /coding_classes/1 or /coding_classes/1.json
-  def show
-  end
+  def show; end
 
   # GET /coding_classes/new
   def new
@@ -16,8 +17,7 @@ class CodingClassesController < ApplicationController
   end
 
   # GET /coding_classes/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /coding_classes or /coding_classes.json
   def create
@@ -52,12 +52,15 @@ class CodingClassesController < ApplicationController
     @coding_class.destroy!
 
     respond_to do |format|
-      format.html { redirect_to coding_classes_path, status: :see_other, notice: "Coding class was successfully destroyed." }
+      format.html do
+        redirect_to coding_classes_path, status: :see_other, notice: "Coding class was successfully destroyed."
+      end
       format.json { head :no_content }
     end
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_coding_class
       @coding_class = CodingClass.find(params.expect(:id))
@@ -65,6 +68,6 @@ class CodingClassesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def coding_class_params
-      params.expect(coding_class: [ :title, :description ])
+      params.expect(coding_class: %i[title description])
     end
 end

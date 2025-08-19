@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Trimester < ApplicationRecord
   has_many :courses
 

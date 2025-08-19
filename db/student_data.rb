@@ -1,17 +1,19 @@
+# frozen_string_literal: true
+
 require 'faker'
 
-puts "Populating student and mentor data..."
+puts 'Populating student and mentor data...'
 
 # Create enrollments for past and current trimesters
 Trimester.where("start_date < '2025-05-01'").each do |trimesters|
-
   # Create 10 enrollments for each of the intro courses
-  intro_course = Course.find_by(trimester_id: trimesters.id, coding_class_id: CodingClass.find_by(title: 'Intro to Programming'))
+  intro_course = Course.find_by(trimester_id: trimesters.id,
+                                coding_class_id: CodingClass.find_by(title: 'Intro to Programming'))
 
   (1..10).each do |i|
     student = Student.find_or_create_by!(
-      first_name: Faker::Name.first_name, 
-      last_name: Faker::Name.last_name, 
+      first_name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
       email: Faker::Internet.email
     )
 
@@ -28,7 +30,8 @@ Trimester.where("start_date < '2025-05-01'").each do |trimesters|
   previous_trimester = Trimester.find_by(id: trimesters.id - 1)
   next unless previous_trimester
 
-  previous_intro_course = Course.find_by(trimester_id: previous_trimester.id, coding_class_id: CodingClass.find_by(title: 'Intro to Programming'))
+  previous_intro_course = Course.find_by(trimester_id: previous_trimester.id,
+                                         coding_class_id: CodingClass.find_by(title: 'Intro to Programming'))
   previous_intro_enrollments = Enrollment.where(course_id: previous_intro_course.id)
 
   previous_intro_enrollments.each_with_index do |enrollment, index|
@@ -45,12 +48,12 @@ end
 
 # Create mentors
 enrollment_count = Enrollment.count
-mentor_count = (enrollment_count.to_f/3.0).ceil
+mentor_count = (enrollment_count.to_f / 3.0).ceil
 
-(1..mentor_count).each do |i|
+(1..mentor_count).each do |_i|
   mentor = Mentor.find_or_create_by!(
-    first_name: Faker::Name.first_name, 
-    last_name: Faker::Name.last_name, 
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
     email: Faker::Internet.email
   )
 
@@ -60,10 +63,7 @@ mentor_count = (enrollment_count.to_f/3.0).ceil
       mentor_id: mentor.id,
       enrollment_id: enrollment.id
     )
-
   end
 end
 
-puts "Finished populating student and mentor data"
-
-
+puts 'Finished populating student and mentor data'

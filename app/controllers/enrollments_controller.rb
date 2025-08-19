@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class EnrollmentsController < ApplicationController
-  before_action :set_enrollment, only: %i[ show edit update destroy ]
+  before_action :set_enrollment, only: %i[show edit update destroy]
 
   # GET /enrollments or /enrollments.json
   def index
@@ -7,8 +9,7 @@ class EnrollmentsController < ApplicationController
   end
 
   # GET /enrollments/1 or /enrollments/1.json
-  def show
-  end
+  def show; end
 
   # GET /enrollments/new
   def new
@@ -16,8 +17,7 @@ class EnrollmentsController < ApplicationController
   end
 
   # GET /enrollments/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /enrollments or /enrollments.json
   def create
@@ -58,6 +58,7 @@ class EnrollmentsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_enrollment
       @enrollment = Enrollment.find(params.expect(:id))
@@ -65,6 +66,6 @@ class EnrollmentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def enrollment_params
-      params.expect(enrollment: [ :course_id, :student_id, :final_grade ])
+      params.expect(enrollment: %i[course_id student_id final_grade])
     end
 end
