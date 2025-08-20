@@ -1,0 +1,8 @@
+<h1>Trimesters</h1>
+
+
+<ul>
+  <% @trimesters.each do |trimester| %>
+    <li><%= "#{trimester.term} #{trimester.year}" %></li>
+  <% end %>
+</ul>
