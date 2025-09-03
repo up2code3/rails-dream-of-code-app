@@ -1,7 +1,7 @@
 <div id="<%= dom_id course %>">
   <p>
     <strong>Coding class:</strong>
-    <%= course.coding_class.title %>
+    <%= course.title %>
   </p>
 
   <p>
@@ -10,11 +10,16 @@
   </p>
 
   <strong>Enrolled students</strong>
+
+<% if course.students.any? %>
   <ul>
-    <% course.enrollments.each do |enrollment| %>
-      <li><%= enrollment.student.full_name %></li>
+    <% course.students.each do |student| %>
+      <li><%= student.first_name %> <%= student.last_name %></li>
     <% end %>
   </ul>
+<% else %>
+  <p>No students enrolled yet.</p>
+<% end %>
 
   <p>
     <strong>Max enrollment:</strong>
