@@ -20,7 +20,7 @@ class TrimestersController < ApplicationController
       render :edit, status: :bad_request
     end
       rescue ActiveRecord::RecordNotFound
-      head :not_found
+        head :not_found
   end
 
   def trimester_params
