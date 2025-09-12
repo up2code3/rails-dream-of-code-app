@@ -27,7 +27,16 @@
     <nav class="navbar navbar-expand-lg header">
       <%= image_tag 'doc.png', alt: 'Dream of Code', height: '100' %>
     </nav>
-    <div class='container main-container'>
+
+    <div class="container main-container">
+      <% if notice %>
+        <p style="color: green"><%= notice %></p>
+      <% end %>
+
+      <% if alert %>
+        <p style="color: red"><%= alert %></p>
+      <% end %>
+
       <%= yield %>
     </div>
   </body>

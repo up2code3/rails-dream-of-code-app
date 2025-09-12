@@ -1,0 +1,16 @@
+<h1>Edit Trimester</h1>
+
+<%= form_with(model: @trimester, local: true) do |form| %>
+
+
+  <div class="form-group">
+    <%= form.label :application_deadline %>
+    <%= form.date_field :application_deadline, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= form.submit "Update Trimester", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<%= link_to "Back", trimesters_path %>

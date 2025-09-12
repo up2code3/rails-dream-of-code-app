@@ -6,12 +6,18 @@ Rails.application.routes.draw do
   resources :enrollments
   resources :mentor_enrollment_assignments
   resources :lessons
-  resources :courses
+  resources :courses do
+    resources :submissions
+  end
   resources :coding_classes
   resources :trimesters
 
+  # Delete all these manual routes, resourceful ones above have us covered!
+  get "/trimesters/:id/edit", to: "trimesters#edit"
+  put "/trimesters/:id", to: "trimesters#update"
   get "/dashboard", to: "admin_dashboard#index"
-
+  get "/courses/new", to: "courses#new"
+  post "/courses", to: "courses#create"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # from lesson, see below --> resources seems cleaner (see above)
