@@ -18,11 +18,11 @@ RSpec.describe "Mentors", type: :request do
     end
 
     context "when mentor does not exist" do
-      it "still shows h1 Mentors but no attributes" do   
+      it "still shows h1 Mentors but no attributes" do
         get "/mentors"
         expect(response).to have_http_status(:ok)
         expect(response.body).not_to include("First name:")
-      end                                                
+      end
     end
   end
 

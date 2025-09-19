@@ -13,12 +13,16 @@
 
   <div>
     <%= form.label :coding_class_id, style: "display: block" %>
-    <%= form.text_field :coding_class_id %>
+    <%= form.select :coding_class_id, options_from_collection_for_select(@coding_classes, :id, :title),
+          { prompt: 'Select Coding Class' },
+          { class: 'form-control' } %>
   </div>
 
   <div>
     <%= form.label :trimester_id, style: "display: block" %>
-    <%= form.text_field :trimester_id %>
+    <%= form.select :trimester_id, options_from_collection_for_select(@trimesters, :id, :display_name),
+          { prompt: 'Select Trimester' },
+          { class: 'form-control' } %>
   </div>
 
   <div>
