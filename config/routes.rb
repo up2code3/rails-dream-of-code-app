@@ -12,6 +12,11 @@ Rails.application.routes.draw do
   resources :coding_classes
   resources :trimesters
 
+  # session routes for session controller AKA log in and out
+  get "login", to: "sessions#new"
+  post "login", to: "sessions#create"
+  delete "logout", to: "sessions#destroy"
+
   # Delete all these manual routes, resourceful ones above have us covered!
   get "/trimesters/:id/edit", to: "trimesters#edit"
   put "/trimesters/:id", to: "trimesters#update"
