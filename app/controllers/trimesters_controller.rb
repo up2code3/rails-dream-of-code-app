@@ -1,5 +1,5 @@
 class TrimestersController < ApplicationController
-  before_action :require_admin, only: [:new, :create, :edit, :update, :destroy]
+  before_action :require_admin, only: [ :new, :create, :edit, :update, :destroy ]
 
   def index
     @trimesters = Trimester.all
@@ -45,7 +45,7 @@ class TrimestersController < ApplicationController
     redirect_to trimesters_path, notice: "Trimester deleted successfully."
   end
 
-def trimester_params
-  params.require(:trimester).permit(:year, :term, :application_deadline, :start_date, :end_date)
-end
+  def trimester_params
+    params.require(:trimester).permit(:year, :term, :application_deadline, :start_date, :end_date)
+  end
 end
