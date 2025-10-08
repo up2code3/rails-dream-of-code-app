@@ -23,7 +23,7 @@ class TrimestersController < ApplicationController
     if @trimester.save
       redirect_to @trimester, notice: "Trimester created successfully."
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :bad_request
     end
   end
 

@@ -5,9 +5,10 @@ class CoursesController < ApplicationController
   before_action :set_course, only: %i[show edit update destroy]
 
   # GET /courses or /courses.json
-  def index
+   def index
     @courses = Course.all
   end
+
 
   # GET /courses/1 or /courses/1.json
   def show
@@ -29,7 +30,10 @@ class CoursesController < ApplicationController
 
   # POST /courses or /courses.json
   def create
+    
     @course = Course.new(course_params)
+    @coding_classes = CodingClass.all   # <-- add
+    @trimesters = Trimester.all   
 
     respond_to do |format|
      if @course.save

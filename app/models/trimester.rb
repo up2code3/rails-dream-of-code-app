@@ -6,6 +6,8 @@ class Trimester < ApplicationRecord
   validates :start_date, presence: true
   validates :end_date, presence: true
   validates :application_deadline, presence: true
+  validates :term, presence: true
+  validates :year, presence: true
 
   def display_name
     "#{term} #{year}"
