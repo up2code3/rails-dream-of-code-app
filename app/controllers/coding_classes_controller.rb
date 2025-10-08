@@ -14,7 +14,8 @@ class CodingClassesController < ApplicationController
   # GET /coding_classes/new
   def new
     @course = Course.new
-    @coding_classes = CodingClass.all
+    @coding_class = CodingClass.new
+    
 end
 
   # GET /coding_classes/1/edit
