@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Api::V1::Courses', type: :request, skip: true do
+RSpec.describe 'Api::V1::Courses', type: :request, skip: false do
   # Set up current, past and future trimesters and courses for each
   let!(:current_trimester) do
     Trimester.create!(
@@ -33,7 +33,8 @@ RSpec.describe 'Api::V1::Courses', type: :request, skip: true do
   end
   let(:coding_class) do
     CodingClass.create!(
-      title: 'Intro to Javascript'
+      title: 'Intro to Javascript',
+    description: 'Covers JS fundamentals'
     )
   end
   let!(:past_course) do

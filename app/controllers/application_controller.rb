@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-
   def require_admin
     if session[:role] != "admin"
       flash[:alert] = "You do not have access to that page"
