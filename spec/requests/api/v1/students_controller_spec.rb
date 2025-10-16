@@ -39,7 +39,7 @@ RSpec.describe 'Api::V1::Students', type: :request, skip: false do
       end.not_to change(Student, :count)
 
       expect(response).to have_http_status(:unprocessable_entity)
-      expect(JSON.parse(response.body)['errors']).to include("First name can't be blank" )
+      expect(JSON.parse(response.body)['errors']).to include("First name can't be blank")
     end
   end
 end

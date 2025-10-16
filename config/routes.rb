@@ -40,7 +40,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get "/courses", to: "courses#index"
       get "/courses/:course_id/enrollments", to: "enrollments#index"
-      post '/students', to: 'students#create'
+      post "/students", to: "students#create"
     end
   end
   # Defines the root path route ("/")
